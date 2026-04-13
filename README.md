@@ -1,6 +1,6 @@
 # CSV Insights CLI
 
-`xyzzz` is upgraded into a practical CSV analysis tool for quick dataset checks from the terminal.
+`csv-insights-cli` is a practical CSV analysis tool for quick dataset checks from the terminal.
 It provides fast column profiling and numeric summaries for small to medium CSV files.
 
 ## Features
@@ -19,8 +19,8 @@ It provides fast column profiling and numeric summaries for small to medium CSV 
 ## Quick Start
 
 ```bash
-git clone https://github.com/sakib-maho/xyzzz.git
-cd xyzzz
+git clone https://github.com/sakib-maho/csv-insights-cli.git
+cd csv-insights-cli
 python3 -m pip install pytest
 ```
 
@@ -40,7 +40,7 @@ python3 -m pytest -q
 ## Project Structure
 
 ```text
-xyzzz/
+csv-insights-cli/
 ├── cli.py
 ├── csv_insights/
 │   └── analyzer.py
