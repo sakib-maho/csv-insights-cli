@@ -17,12 +17,6 @@ It provides fast column profiling and numeric summaries for small to medium CSV 
 - Simple command interface for local data debugging
 - Test suite with fixture data
 
-## Tech Stack
-
-- Python 3.10+
-- Standard library only (`csv`, `argparse`, `json`)
-- `pytest` for tests
-
 ## Quick Start
 
 ```bash
@@ -31,17 +25,27 @@ cd csv-insights-cli
 python3 -m pip install pytest
 ```
 
+## Tests
+
+```bash
+python3 -m pytest -q
+```
+
+## License
+
+MIT License. See `LICENSE`.
+
+## Tech Stack
+
+- Python 3.10+
+- Standard library only (`csv`, `argparse`, `json`)
+- `pytest` for tests
+
 ## Usage
 
 ```bash
 python3 cli.py tests/fixtures/sales.csv profile
 python3 cli.py tests/fixtures/sales.csv summary --column revenue
-```
-
-## Run Tests
-
-```bash
-python3 -m pytest -q
 ```
 
 ## Project Structure
@@ -56,7 +60,3 @@ csv-insights-cli/
     ├── test_analyzer.py
     └── test_cli.py
 ```
-
-## License
-
-MIT License. See `LICENSE`.
