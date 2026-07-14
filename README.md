@@ -1,35 +1,45 @@
 # CSV Insights CLI
 
-`csv-insights-cli` is a practical CSV analysis tool for quick dataset checks from the terminal.
-It provides fast column profiling and numeric summaries for small to medium CSV files.
+`csv-insights-cli` helps you inspect a CSV quickly before pulling it into a
+notebook or analytics pipeline. It focuses on practical questions: which columns
+are complete, which values are common, where outliers appear, and how numeric
+columns move together.
 
 ## Features
 
-- Column profile report with `filled`, `missing`, and `unique` counts
-- Numeric summary (`count`, `min`, `max`, `avg`) for any selected column
-- Simple command interface for local data debugging
-- Test suite with fixture data
+- Column profiling with `filled`, `missing`, `unique`, and `numeric` flags
+- Numeric summaries with `min`, `max`, `avg`, `median`, and `std_dev`
+- Top value counts for categorical or free-text columns
+- IQR-based outlier detection for numeric columns
+- Pearson correlation matrix across numeric columns
+- Full combined report for one-command inspection
 
-## Tech Stack
-
-- Python 3.10+
-- Standard library only (`csv`, `argparse`, `json`)
-- `pytest` for tests
-
-## Quick Start
+## CLI Usage
 
 ```bash
-git clone https://github.com/sakib-maho/csv-insights-cli.git
-cd csv-insights-cli
-python3 -m pip install pytest
+python3 cli.py profile tests/fixtures/sales.csv
+python3 cli.py numeric tests/fixtures/sales.csv --column revenue
+python3 cli.py values tests/fixtures/sales.csv --column region --top 3
+python3 cli.py outliers tests/fixtures/sales.csv --column revenue
+python3 cli.py corr tests/fixtures/sales.csv
+python3 cli.py report tests/fixtures/sales.csv
 ```
 
-## CLI Examples
+## Python API
 
-```bash
-python3 cli.py tests/fixtures/sales.csv profile
-python3 cli.py tests/fixtures/sales.csv summary --column revenue
+```python
+from csv_insights.analyzer import full_report, load_rows, summarize_numeric
+
+rows = load_rows("tests/fixtures/sales.csv")
+print(summarize_numeric(rows, "revenue"))
+print(full_report("tests/fixtures/sales.csv"))
 ```
+
+## Included Fixture
+
+The sample dataset contains regional sales metrics with multiple numeric columns,
+missing data, repeated categories, and a deliberate outlier so the analytics
+commands produce meaningful output.
 
 ## Run Tests
 
@@ -37,19 +47,6 @@ python3 cli.py tests/fixtures/sales.csv summary --column revenue
 python3 -m pytest -q
 ```
 
-## Project Structure
-
-```text
-csv-insights-cli/
-├── cli.py
-├── csv_insights/
-│   └── analyzer.py
-└── tests/
-    ├── fixtures/sales.csv
-    ├── test_analyzer.py
-    └── test_cli.py
-```
-
 ## License
 
-MIT License. See `LICENSE`.
+MIT. See `LICENSE`.
